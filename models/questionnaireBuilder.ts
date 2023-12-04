@@ -1,12 +1,16 @@
 import { Answer, CreateAnswerDto } from '@/types/Answer';
-import { CreateQuestionDto, Question } from '@/types/Question';
+import {
+  CreateQuestionDto,
+  Question,
+  URIEncodedQuestionId,
+} from '@/types/Question';
 import { Questionnaire } from '@/types/Questionnaire';
 import { deepCopyOf } from '@/utils/deepCopyOf';
 
 export class QuestionnaireBuilder {
   constructor(
     private _name: string = 'New Quiz',
-    private _questions: Record<keyof any, Question> = {},
+    private _questions: Record<URIEncodedQuestionId, Question> = {},
   ) {}
 
   static createAnswer(fromDto: CreateAnswerDto): Answer {

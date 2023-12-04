@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { QuestionVariant } from '@/types/Question';
+import { getQuestionUrl } from '@/utils/getQuestionUrl';
 
 export type AppHeaderProps = {
   previousQuestionId?: string | null;
@@ -22,7 +23,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({
     <header className={clsx('h-[54px] flex items-center w-full', className)}>
       <Container className='relative'>
         {previousQuestionId && (
-          <Link href={`/question/${previousQuestionId}`}>
+          <Link href={getQuestionUrl(previousQuestionId)}>
             <Image
               src={Chevron}
               width={24}

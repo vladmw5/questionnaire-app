@@ -40,7 +40,7 @@ const QuestionPage: NextPage<QuestionPageStaticProps> = ({ question }) => {
     <main>
       <AppHeader
         className='mb-5'
-        previousQuestionId={question.previousQuestionId }
+        previousQuestionId={question.previousQuestionId}
       />
       <Container simple>
         <QuestionBlock title={question.title} answers={question.answers} />

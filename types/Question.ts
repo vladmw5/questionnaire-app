@@ -1,5 +1,6 @@
 import { Answer, CreateAnswerDto } from './Answer';
 
+export type URIEncodedQuestionId = string;
 export type QuestionVariant = 'light' | 'dark';
 
 export type Question = {

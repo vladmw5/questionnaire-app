@@ -1,6 +1,6 @@
-import { Question } from './Question';
+import { Question, URIEncodedQuestionId } from './Question';
 
 export type Questionnaire = {
   name: string;
-  questions: Record<keyof any, Question>;
+  questions: Record<URIEncodedQuestionId, Question>;
 };
