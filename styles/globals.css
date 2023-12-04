@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --nebula-gradient: linear-gradient(
+      165.54deg,
+      #141333 -33.39%,
+      #202261 15.89%,
+      #543c97 55.84%,
+      #6939a2 74.96%
+    );
+    --nebula-shadow: 2px 2px 6px 0px rgba(84, 60, 151, 0.25);
+  }
+}
+
+.btn {
+  @apply bg-cold-steel border border-ash rounded-2xl w-full h-16 inline-flex justify-center items-center;
+  box-shadow: var(--nebula-shadow);
+}
+
+.btn:active {
+  @apply text-secondary;
+  background: var(--nebula-gradient);
+}

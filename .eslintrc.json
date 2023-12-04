@@ -11,10 +11,14 @@
     "browser": true,
     "es6": true
   },
+  "globals": {
+    "React": "readonly"
+  },
   "rules": {
     "no-magic-numbers": 1,
     "max-len": 0,
     "react/jsx-uses-react": 2,
+    "react/prop-types": 0,
     "react/react-in-jsx-scope": 0,
     "react/jsx-uses-vars": 2,
     "newline-after-var": 2,
@@ -22,6 +26,12 @@
       "warn",
       {
         "endOfLine": "auto"
+      }
+    ],
+    "no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_"
       }
     ]
   }
