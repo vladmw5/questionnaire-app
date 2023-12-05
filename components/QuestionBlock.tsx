@@ -2,11 +2,16 @@ import { Answer } from '@/types/Answer';
 import AnswerButton from './AnswerButton';
 
 export type QuestionProps = {
+  questionId: string;
   title: string;
   answers: Answer[];
 };
 
-const QuestionBlock: React.FC<QuestionProps> = ({ title, answers }) => {
+const QuestionBlock: React.FC<QuestionProps> = ({
+  title,
+  answers,
+  questionId,
+}) => {
   return (
     <div>
       <h1 className='text-2xl font-bold mb-[30px] text-primary'>{title}</h1>
@@ -16,6 +21,7 @@ const QuestionBlock: React.FC<QuestionProps> = ({ title, answers }) => {
             key={answer.id}
             value={answer.value}
             nextQuestionId={answer.nextQuestionId}
+            questionId={questionId}
           />
         ))}
       </ul>

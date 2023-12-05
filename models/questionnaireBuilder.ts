@@ -25,8 +25,8 @@ export class QuestionnaireBuilder {
     return {
       id: fromDto.id,
       title: fromDto.title,
-      answers: fromDto.answers.map((answer) =>
-        QuestionnaireBuilder.createAnswer(answer),
+      answers: fromDto.answers.map((answerDto) =>
+        QuestionnaireBuilder.createAnswer(answerDto),
       ),
       previousQuestionId: fromDto.previousQuestionId,
     };

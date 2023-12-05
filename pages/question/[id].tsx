@@ -43,7 +43,11 @@ const QuestionPage: NextPage<QuestionPageStaticProps> = ({ question }) => {
         previousQuestionId={question.previousQuestionId}
       />
       <Container simple>
-        <QuestionBlock title={question.title} answers={question.answers} />
+        <QuestionBlock
+          title={question.title}
+          answers={question.answers}
+          questionId={question.id}
+        />
       </Container>
     </main>
   );
