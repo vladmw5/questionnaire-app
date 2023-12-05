@@ -223,6 +223,10 @@ export const myQuestionnaire = new QuestionnaireBuilder()
     dependsOn: [tendToOverthinkQuestionId],
     title: 'So how does it work?',
     previousQuestionId: tendToOverthinkQuestionId,
+    variant: 'dark',
+    subtitle:
+      'We analyze hundreds of data points to create your unique astrological blueprint. This is combined with AI to tailor-make your astrological insights, based on your answers. We’re going to change your relationship with astrology.',
+    centerText: true,
     answers: [
       {
         id: 'what-is-next',
@@ -330,6 +334,8 @@ export const myQuestionnaire = new QuestionnaireBuilder()
     id: partnerPriorityQuestionId,
     title: 'Do you agree with the statement below?',
     subtitle: '“My partner and I make sex a priority in our relationship”',
+    centerText: true,
+    subtitleBold: true,
     previousQuestionId: partnerGenderQuestionId,
     answers: [
       {

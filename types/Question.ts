@@ -11,6 +11,8 @@ export type Question = {
   previousQuestionId: string | null;
   variant: QuestionVariant;
   subtitle: string | null;
+  centerText: boolean;
+  subtitleBold: boolean;
 };
 
 export type CreateQuestionDto = {
@@ -21,4 +23,6 @@ export type CreateQuestionDto = {
   dependsOn?: URIEncodedQuestionId[];
   variant?: QuestionVariant;
   subtitle?: string | null;
+  centerText?: boolean;
+  subtitleBold?: boolean;
 };

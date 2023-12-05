@@ -14,6 +14,7 @@ const config: Config = {
         powder: '#FFF0F0',
         'cold-steel': '#EAEEF7',
         ash: '  #E0E0E0',
+        'violent-violet': '#6A3AA2',
       },
     },
   },

@@ -11,6 +11,7 @@ import Container from '@/components/Container';
 import AppHeader from '@/components/AppHeader';
 import { QuestionnaireBuilder } from '@/models/questionnaireBuilder';
 import { useAnswers } from '@/redux/store';
+import clsx from 'clsx';
 
 export const getStaticPaths = (async () => {
   return {
@@ -56,16 +57,28 @@ const QuestionPage: NextPage<QuestionPageStaticProps> = ({
   );
 
   return (
-    <main>
+    <main
+      className={clsx(
+        'min-h-screen pb-5',
+        resolvedQuestion.variant === 'light'
+          ? 'bg-powder'
+          : 'with-nebula-gradient',
+      )}
+    >
       <AppHeader
         className='mb-5'
         previousQuestionId={resolvedQuestion.previousQuestionId}
+        variant={resolvedQuestion.variant}
       />
       <Container simple>
         <QuestionBlock
           title={resolvedQuestion.title}
+          subtitle={resolvedQuestion.subtitle}
           answers={resolvedQuestion.answers}
           questionId={resolvedQuestion.id}
+          variant={resolvedQuestion.variant}
+          centerText={resolvedQuestion.centerText}
+          subtitleBold={resolvedQuestion.subtitleBold}
         />
       </Container>
     </main>

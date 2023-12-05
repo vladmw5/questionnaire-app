@@ -34,7 +34,9 @@ export class QuestionnaireBuilder {
       ),
       previousQuestionId: fromDto.previousQuestionId,
       variant: fromDto.variant ?? 'light',
+      centerText: fromDto.centerText ?? false,
       subtitle: fromDto.subtitle ?? null,
+      subtitleBold: fromDto.subtitleBold ?? false,
     };
   }
 
@@ -66,46 +68,6 @@ export class QuestionnaireBuilder {
     return QuestionnaireBuilder.createQuestion({
       ...deepCopyOf(question),
       title: newQuestionTitle,
-      answers: newAnswers,
-    });
-  }
-
-  static fillSlotsForQuestionTitle(
-    question: Question,
-    questionId: URIEncodedQuestionId,
-    withValue: string,
-  ): Question {
-    const newQuestionTitle = replaceSubstring(
-      question.title,
-      QuestionnaireBuilder.slotFor(questionId),
-      withValue,
-    );
-
-    return QuestionnaireBuilder.createQuestion({
-      ...deepCopyOf(question),
-      title: newQuestionTitle,
-    });
-  }
-
-  static fillSlotsForQuestionAnswers(
-    question: Question,
-    withValue: string,
-  ): Question {
-    const newAnswers = question.answers.map((answer) =>
-      QuestionnaireBuilder.createAnswer({
-        ...answer,
-        nextQuestionId: answer.nextQuestionId
-          ? replaceSubstring(
-              answer.nextQuestionId,
-              QuestionnaireBuilder.slotFor(question.id),
-              withValue,
-            )
-          : null,
-      }),
-    );
-
-    return QuestionnaireBuilder.createQuestion({
-      ...deepCopyOf(question),
       answers: newAnswers,
     });
   }

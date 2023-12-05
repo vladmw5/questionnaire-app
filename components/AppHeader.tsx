@@ -1,4 +1,5 @@
 import Chevron from '@/public/chevron.svg';
+import WhiteChevron from '@/public/chevron_white.svg';
 import LogoBlack from '@/public/logo_black.png';
 import LogoWhite from '@/public/logo_white.png';
 import { NativeHTMLProps } from '@/types/NativeHTMLProps';
@@ -25,13 +26,10 @@ const AppHeader: React.FC<AppHeaderProps> = ({
         {previousQuestionId && (
           <Link href={getQuestionUrl(previousQuestionId)}>
             <Image
-              src={Chevron}
+              src={variant === 'light' ? Chevron : WhiteChevron}
               width={24}
               height={24}
               alt='Go to the previous question'
-              style={{
-                fill: variant === 'light' ? '#333333' : '#FBFBFF',
-              }}
             />
           </Link>
         )}
