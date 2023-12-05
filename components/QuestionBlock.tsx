@@ -19,6 +19,7 @@ const QuestionBlock: React.FC<QuestionProps> = ({
         {answers.map((answer) => (
           <AnswerButton
             key={answer.id}
+            id={answer.id}
             value={answer.value}
             nextQuestionId={answer.nextQuestionId}
             questionId={questionId}

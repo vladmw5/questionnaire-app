@@ -1,11 +1,12 @@
 import { URIEncodedQuestionId } from '@/types/Question';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-export type AnswersState = Record<URIEncodedQuestionId, string>;
 export type GivenAnswer = {
   questionId: string;
+  answerId: string;
   value: string;
 };
+export type AnswersState = Record<URIEncodedQuestionId, GivenAnswer>;
 
 const initialState: AnswersState = {};
 
@@ -14,10 +15,7 @@ const answersSlice = createSlice({
   initialState,
   reducers: {
     answerGiven(state, action: PayloadAction<GivenAnswer>) {
-      return {
-        ...state,
-        [action.payload.questionId]: action.payload.value,
-      };
+      state[action.payload.questionId] = action.payload;
     },
   },
 });

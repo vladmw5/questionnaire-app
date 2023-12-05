@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import answersReducer from './answers.slice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
@@ -24,3 +24,4 @@ export type AppState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAnswers = () => useSelector((state: AppState) => state.answers);

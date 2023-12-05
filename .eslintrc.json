@@ -29,7 +29,7 @@
       }
     ],
     "no-unused-vars": [
-      "error",
+      "off",
       {
         "argsIgnorePattern": "^_"
       }

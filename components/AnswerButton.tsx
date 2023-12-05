@@ -4,12 +4,16 @@ import { getQuestionUrl } from '@/utils/getQuestionUrl';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 
-export type AnswerButtonProps = { questionId: string } & Omit<Answer, 'id'>;
+export type AnswerButtonProps = { questionId: string } & Omit<
+  Answer,
+  'dependents'
+>;
 
 const AnswerButton: React.FC<AnswerButtonProps> = ({
   questionId,
   nextQuestionId,
   value,
+  id: answerId,
 }) => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -22,6 +26,7 @@ const AnswerButton: React.FC<AnswerButtonProps> = ({
           answerGiven({
             questionId,
             value,
+            answerId,
           }),
         );
         if (nextQuestionId) {

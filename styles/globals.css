@@ -16,7 +16,7 @@
 }
 
 .btn {
-  @apply bg-cold-steel border border-ash rounded-2xl w-full h-16 inline-flex justify-center items-center;
+  @apply bg-cold-steel border border-ash rounded-2xl w-full h-16 inline-flex justify-center items-center px-4 py-3 text-sm;
   box-shadow: var(--nebula-shadow);
 }
 
