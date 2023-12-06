@@ -1,26 +1,26 @@
-## Installation
+# Installation
 
-# Install all the dependencies using
+## Install all the dependencies using
 
 ```bash
 npm install
 ```
 
-## Launching the project
+# Launching the project
 
-# To launch the development server, run
+## To launch the development server, run
 
 ```bash
 npm run dev
 ```
 
-# To run the project in the production mode, run
+## To run the project in the production mode, run
 
 ```bash
 npm run build && npm run start
 ```
 
-### Questionnaire Configuration Manual
+# Questionnaire Configuration Manual
 
 ## General
 
@@ -35,7 +35,7 @@ Although nothing stops you from building the questionnaire by hand as a plain Ja
 
 ## Use cases
 
-# Creating a single question questionnaire
+### Creating a single question questionnaire
 
 This is a very basic example the purpose of which is to demonstrate how to use the API basics.
 
@@ -99,7 +99,7 @@ The `resolve()` method returns a `Questionnaire` JavaScript object that can be J
 
 Remember, a questionnaire is a graph embodied as a JavaScript object, and each graph has vertexes and arcs. <b>The questions are the vertexes and the ids are the arcs</b>
 
-# Creating multiple questions
+### Creating multiple questions
 
 You can chain `.question()` calls to create multiple questions:
 
@@ -155,7 +155,7 @@ As you can see, the first question answers are linked with the second question: 
 
 There is no difference in the order of calling the question methods, <b>the question order is defined only by the id values</b>
 
-# Branching
+### Branching
 
 If you need to branch your questionnaire, simply set question answers' `nextQuestionId` to different values:
 
@@ -181,7 +181,7 @@ new QuestionnaireBuilder()
   .resolve();
 ```
 
-# Dynamic Question title
+### Dynamic Question title
 
 A dynamic question is a question some part of the content of which is dependent on the answers given to the previous questions.
 
@@ -248,7 +248,7 @@ The `dependents` property defines the value which will be substituted in the dep
 
 Warning: currently you can create only one slot per dependent question and each answer can substitute only one value
 
-# Dynamic nextQuestionId
+### Dynamic nextQuestionId
 
 In case your answer can link to different questions depending on what answers were given previously, you can use the similar approach, but now your `nextQuestionId` should contain a slot:
 
@@ -270,7 +270,7 @@ new QuestionnaireBuilder()
   .resolve();
 ```
 
-# Dynamic previousQuestionId
+### Dynamic previousQuestionId
 
 In this case you have to add an additional parameter `hasMultiplePreviousIds = true` and the question's `previousQuestionId` must contain all the slots for the question's that this depends on:
 
