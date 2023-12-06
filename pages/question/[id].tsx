@@ -12,6 +12,9 @@ import AppHeader from '@/components/AppHeader';
 import { QuestionnaireBuilder } from '@/models/questionnaireBuilder';
 import { useAnswers } from '@/redux/store';
 import clsx from 'clsx';
+import { Open_Sans } from 'next/font/google';
+
+const openSans = Open_Sans({ subsets: ['latin'] });
 
 export const getStaticPaths = (async () => {
   return {
@@ -20,7 +23,7 @@ export const getStaticPaths = (async () => {
         id: questionId,
       },
     })),
-    fallback: true,
+    fallback: false,
   };
 }) satisfies GetStaticPaths;
 
@@ -59,6 +62,7 @@ const QuestionPage: NextPage<QuestionPageStaticProps> = ({
   return (
     <main
       className={clsx(
+        openSans.className,
         'min-h-screen pb-5',
         resolvedQuestion.variant === 'light'
           ? 'bg-powder'

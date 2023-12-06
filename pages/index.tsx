@@ -1,14 +1,42 @@
-import { genderQuestionId } from '@/data/questionnaire';
+import ErrorLayout from '@/components/ErrorLayout';
+import { myQuestionnaire } from '@/data/questionnaire';
+import { QuestionnaireBuilder } from '@/models/questionnaireBuilder';
 import { getQuestionUrl } from '@/utils/getQuestionUrl';
-import { Open_Sans } from 'next/font/google';
-import Link from 'next/link';
+import {
+  GetServerSideProps,
+  InferGetServerSidePropsType,
+  NextPage,
+} from 'next';
 
-const openSans = Open_Sans({ subsets: ['latin'] });
+export const getServerSideProps = (async () => {
+  const firstQuestion =
+    QuestionnaireBuilder.getFirstQuestionOf(myQuestionnaire);
 
-export default function Home() {
+  if (!firstQuestion) {
+    return {
+      props: {
+        errorMessage: `The app has failed to resolve the questionnaire entry point.
+          The entry question must have previousQuestionId set to null`,
+      },
+    };
+  }
+
+  return {
+    redirect: {
+      destination: getQuestionUrl(firstQuestion.id),
+      permanent: false,
+    },
+  };
+}) satisfies GetServerSideProps;
+
+const Home: NextPage<
+  InferGetServerSidePropsType<typeof getServerSideProps>
+> = ({ errorMessage }) => {
   return (
-    <main className={openSans.className}>
-      <Link href={getQuestionUrl(genderQuestionId)}>To the first question</Link>
-    </main>
+    <ErrorLayout>
+      <p className='text-lg text-center text-primary'>{errorMessage}</p>
+    </ErrorLayout>
   );
-}
+};
+
+export default Home;

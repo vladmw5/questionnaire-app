@@ -1,7 +1,7 @@
 import { QuestionnaireBuilder } from '@/models/questionnaireBuilder';
 import { createQuestionIdFrom } from '@/utils/createQuestionIdFrom';
 
-export const genderQuestionId = createQuestionIdFrom('root-gender');
+const genderQuestionId = createQuestionIdFrom('root-gender');
 const relationshipStatusQuestionId = createQuestionIdFrom('relationship');
 const singleParentQuestionId = createQuestionIdFrom('single-parent');
 const parentQuestionId = createQuestionIdFrom('parent');

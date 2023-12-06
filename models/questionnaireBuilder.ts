@@ -129,6 +129,14 @@ export class QuestionnaireBuilder {
     return newQuestion;
   }
 
+  static getFirstQuestionOf(
+    questionnaire: Questionnaire,
+  ): Question | undefined {
+    return Object.values(questionnaire.questions).find(
+      (question) => question.previousQuestionId === null,
+    );
+  }
+
   name(newName: string): this {
     this._name = newName;
 
