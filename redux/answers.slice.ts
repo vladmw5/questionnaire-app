@@ -2,7 +2,7 @@ import { URIEncodedQuestionId } from '@/types/Question';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export type GivenAnswer = {
-  questionId: string;
+  questionId: URIEncodedQuestionId;
   answerId: string;
   value: string;
 };
@@ -17,9 +17,17 @@ const answersSlice = createSlice({
     answerGiven(state, action: PayloadAction<GivenAnswer>) {
       state[action.payload.questionId] = action.payload;
     },
+    answerDeleted(
+      state,
+      action: PayloadAction<Pick<GivenAnswer, 'questionId'>>,
+    ) {
+      const { [action.payload.questionId]: keyToDelete, ...newState } = state;
+
+      return newState;
+    },
   },
 });
 
-export const { answerGiven } = answersSlice.actions;
+export const { answerGiven, answerDeleted } = answersSlice.actions;
 
 export default answersSlice.reducer;

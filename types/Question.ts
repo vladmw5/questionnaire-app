@@ -8,7 +8,8 @@ export type Question = {
   dependsOn: URIEncodedQuestionId[];
   title: string;
   answers: Answer[];
-  previousQuestionId: string | null;
+  previousQuestionId: URIEncodedQuestionId | null;
+  hasMultiplePreviousIds: boolean;
   variant: QuestionVariant;
   subtitle: string | null;
   centerText: boolean;
@@ -19,7 +20,8 @@ export type CreateQuestionDto = {
   id: URIEncodedQuestionId;
   title: string;
   answers: CreateAnswerDto[];
-  previousQuestionId: string | null;
+  previousQuestionId: URIEncodedQuestionId | null;
+  hasMultiplePreviousIds?: boolean;
   dependsOn?: URIEncodedQuestionId[];
   variant?: QuestionVariant;
   subtitle?: string | null;

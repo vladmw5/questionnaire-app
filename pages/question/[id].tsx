@@ -5,7 +5,7 @@ import {
   NextPage,
 } from 'next';
 import { myQuestionnaire } from '@/data/questionnaire';
-import { Question } from '@/types/Question';
+import { Question, URIEncodedQuestionId } from '@/types/Question';
 import QuestionBlock from '@/components/QuestionBlock';
 import Container from '@/components/Container';
 import AppHeader from '@/components/AppHeader';
@@ -30,7 +30,7 @@ export type QuestionPageStaticProps = {
 };
 
 export const getStaticProps = (async (context: GetStaticPropsContext) => {
-  const questionId = context.params?.id as string;
+  const questionId = context.params?.id as URIEncodedQuestionId;
   const question = myQuestionnaire.questions[questionId]!;
   const questionsOnWhichThisDepends = question.dependsOn.map(
     (dependencyId) => myQuestionnaire.questions[dependencyId]!,
@@ -56,6 +56,8 @@ const QuestionPage: NextPage<QuestionPageStaticProps> = ({
     answers,
   );
 
+  console.log(resolvedQuestion);
+
   return (
     <main
       className={clsx(
@@ -69,6 +71,7 @@ const QuestionPage: NextPage<QuestionPageStaticProps> = ({
         className='mb-5'
         previousQuestionId={resolvedQuestion.previousQuestionId}
         variant={resolvedQuestion.variant}
+        questionId={resolvedQuestion.id}
       />
       <Container simple>
         <QuestionBlock

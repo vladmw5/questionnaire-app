@@ -22,7 +22,7 @@ const thinkAboutQuestionId = createQuestionIdFrom('think-about');
 const aboutUsQuestionId = createQuestionIdFrom('about-us');
 
 export const myQuestionnaire = new QuestionnaireBuilder()
-  .name('My First Questionnaire')
+  .name('Nebula Survey')
   .question({
     id: genderQuestionId,
     title: 'Select your gender:',
@@ -409,6 +409,7 @@ export const myQuestionnaire = new QuestionnaireBuilder()
     )}${QuestionnaireBuilder.slotFor(
       emotionalControlQuestionId,
     )}${QuestionnaireBuilder.slotFor(thinkAboutQuestionId)}`,
+    hasMultiplePreviousIds: true,
     answers: [
       {
         id: 'poster-or-billboard',

@@ -33,6 +33,7 @@ export class QuestionnaireBuilder {
         QuestionnaireBuilder.createAnswer(answerDto),
       ),
       previousQuestionId: fromDto.previousQuestionId,
+      hasMultiplePreviousIds: fromDto.hasMultiplePreviousIds ?? false,
       variant: fromDto.variant ?? 'light',
       centerText: fromDto.centerText ?? false,
       subtitle: fromDto.subtitle ?? null,
@@ -99,18 +100,13 @@ export class QuestionnaireBuilder {
 
     let newQuestion = deepCopyOf(question);
 
-    let hasDynamicPreviousId = false;
-
     questionsOnWhichThisDepends.forEach((dependsOnQuestion) => {
-      console.log(dependsOnQuestion);
-      console.log(alreadyGivenAnswers);
       const answerValueOfWhichToSubstitute = dependsOnQuestion.answers.find(
         (answer) =>
           answer.id === alreadyGivenAnswers[dependsOnQuestion.id]?.answerId,
       );
 
       if (!answerValueOfWhichToSubstitute) {
-        hasDynamicPreviousId = true;
         return;
       }
 
@@ -122,7 +118,7 @@ export class QuestionnaireBuilder {
         dependsOnQuestion.id,
         substitutionValue,
       );
-      if (hasDynamicPreviousId) {
+      if (newQuestion.hasMultiplePreviousIds) {
         newQuestion = QuestionnaireBuilder.fillSlotsForPreviousQuestionId(
           newQuestion,
           substitutionValue,

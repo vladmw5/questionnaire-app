@@ -5,13 +5,16 @@ import LogoWhite from '@/public/logo_white.png';
 import { NativeHTMLProps } from '@/types/NativeHTMLProps';
 import Container from './Container';
 import Image from 'next/image';
-import Link from 'next/link';
 import clsx from 'clsx';
-import { QuestionVariant } from '@/types/Question';
+import { QuestionVariant, URIEncodedQuestionId } from '@/types/Question';
 import { getQuestionUrl } from '@/utils/getQuestionUrl';
+import { useRouter } from 'next/router';
+import { useAppDispatch } from '@/redux/store';
+import { answerDeleted } from '@/redux/answers.slice';
 
 export type AppHeaderProps = {
-  previousQuestionId?: string | null;
+  questionId: URIEncodedQuestionId;
+  previousQuestionId?: URIEncodedQuestionId | null;
   variant?: QuestionVariant;
 } & Pick<NativeHTMLProps<HTMLElement>, 'className'>;
 
@@ -19,19 +22,32 @@ const AppHeader: React.FC<AppHeaderProps> = ({
   previousQuestionId = null,
   variant = 'light',
   className,
+  questionId,
 }) => {
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  const handBackButtonClick = (toQuestionId: URIEncodedQuestionId) => {
+    dispatch(
+      answerDeleted({
+        questionId,
+      }),
+    );
+    router.push(getQuestionUrl(toQuestionId));
+  };
+
   return (
     <header className={clsx('h-[54px] flex items-center w-full', className)}>
       <Container className='relative'>
         {previousQuestionId && (
-          <Link href={getQuestionUrl(previousQuestionId)}>
+          <button onClick={() => handBackButtonClick(previousQuestionId)}>
             <Image
               src={variant === 'light' ? Chevron : WhiteChevron}
               width={24}
               height={24}
               alt='Go to the previous question'
             />
-          </Link>
+          </button>
         )}
         <Image
           src={variant === 'light' ? LogoBlack : LogoWhite}

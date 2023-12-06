@@ -1,13 +1,13 @@
 import { answerGiven } from '@/redux/answers.slice';
+import { useAppDispatch } from '@/redux/store';
 import { Answer } from '@/types/Answer';
-import { QuestionVariant } from '@/types/Question';
+import { QuestionVariant, URIEncodedQuestionId } from '@/types/Question';
 import { getQuestionUrl } from '@/utils/getQuestionUrl';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
 
 export type AnswerButtonProps = {
-  questionId: string;
+  questionId: URIEncodedQuestionId;
   variant: QuestionVariant;
 } & Omit<Answer, 'dependents'>;
 
@@ -18,7 +18,7 @@ const AnswerButton: React.FC<AnswerButtonProps> = ({
   id: answerId,
   variant,
 }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const router = useRouter();
 
   return (

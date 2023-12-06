@@ -1,10 +1,10 @@
 import { Answer } from '@/types/Answer';
 import AnswerButton from './AnswerButton';
-import { QuestionVariant } from '@/types/Question';
+import { QuestionVariant, URIEncodedQuestionId } from '@/types/Question';
 import clsx from 'clsx';
 
 export type QuestionProps = {
-  questionId: string;
+  questionId: URIEncodedQuestionId;
   title: string;
   answers: Answer[];
   variant: QuestionVariant;
