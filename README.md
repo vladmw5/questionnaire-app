@@ -309,7 +309,26 @@ You can specify `variant` of your question (`light` or `dark`), `subtitle`, `cen
 
 ## Know the limits
 
-1. You have to always keep your eye on the referential integrity between questions. <b>Violating the integrity will make the app to crash</b>
+1. You have to always keep your eye on the referential integrity between questions. <b>Violating the integrity will make the app to crash.</b>
 2. The app currently handles only these two kinds of errors: `NoEntrypointQuestion` error and `PageNotFound` error. Other types may cause the app to crash.
-3. There is no 'question protection' meaning that the user can use the browser address string to bypass some questions. However to do this, the user must know the question ID in advance, which is not possible unless the user passes the survey at least once
-4. Read all the warning messages very carefully, it contains the additional information about all the pitfalls and other limitations.
+3. There is no 'question protection' meaning that the user can use the browser address string to bypass some questions. However to do this, the user must know the question ID in advance, which is not possible unless the user passes the survey at least once.
+4. The app uses `redux-persist` to persist user answers. Clearing the local storage while completing the survey may results in an error.
+5. Read all the warning messages very carefully, it contains some additional information about all the pitfalls and other limitations.
+
+# Tech Stack:
+
+Node v20
+
+Next.js v14 (with pages router)
+
+Typescript
+
+Redux Toolkit, React-Redux, Redux-Persist
+
+Tailwind CSS
+
+clsx
+
+ESLint
+
+Prettier
