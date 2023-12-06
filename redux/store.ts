@@ -16,6 +16,10 @@ export const store = configureStore({
     answers: persistedAnswerReducer,
   },
   devTools: true,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export const persistedStore = persistStore(store);
