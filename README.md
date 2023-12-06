@@ -24,14 +24,14 @@ npm run build && npm run start
 
 ## General
 
-The questionnaire represents a Directed Graph-like data structure
+The questionnaire represents a Directed Graph-like data structure.
 The application statically pre-renders all the question pages using this graph and the Next.js Static Site Generation feature.
 
-The existing config can be found in the `data/questionnaire.ts` file. <i>This is the only file you need to edit to configure your questionnaire</i>
+The existing config can be found in the `data/questionnaire.ts` file. <i>This is the only file you need to edit to configure your questionnaire.</i>
 
 ## QuestionnaireBuilder API
 
-Although nothing stops you from building the questionnaire by hand as a plain JavaScript object, I have created the QuestionnaireBuilder API that simplifies the process. Later in the document we will look at all the use cases this API supports.
+Although nothing stops you from building the questionnaire by hand as a plain JavaScript object, I have created the `QuestionnaireBuilder` API that simplifies the process. Later in the document we will look at all the use cases this API supports.
 
 ## Use cases
 
@@ -48,9 +48,8 @@ const firstQuestionId = createQuestionIdFrom('my-id');
 ```
 
 A question id can be any plain string. This id will be used to keep <i>referential integrity</i> with other questions and as a future <i>route</i> of your question, so be aware that you have to URI <i>encode your id</i> in case it contains any 'special' characters. Luckily for you, I have already created a special utility function named `createQuestionIdFrom(seed)` that encodes and encrypts your id using the Caesar cipher algorithm.
-<br/>
+
 Note: you can create your own method to generate ids, but the generated id must be URI encoded and the generating algorithm must be <i>pure</i>.
-<br/>
 
 Now, when you have created your id, create your questionnaire with a single question:
 
@@ -89,15 +88,18 @@ The `name()` method sets the questionnaire name (in the current implementation t
 <br/>
 
 The `question()` method is used to generate your question from a template schema. You must specify:
-(-) `id` - the question id
-(-) `title` - the question title
-(-) `previousQuestionId` - self-explanatory. Since this is the first first question in our questionnaire, it must have this property set to `null`. Warning: you must have only one question with `previousQuestionId = null`, otherwise the app will fail to resolve the dependencies and find the entry point of the questionnaire.
-(-) `answers` - an array of objects each having `id` (self-explanatory, can be any string), `value` (will be displayed to the user) and `nextQuestionId` (self-explanatory, if set to `null` then this indicates that after answering of this the quiz 'ends').
-<br/>
+
+`id` - the question id;
+
+`title` - the question title;
+
+`previousQuestionId` - self-explanatory. Since this is the first first question in our questionnaire, it must have this property set to `null`. Warning: you must have only one question with `previousQuestionId = null`, otherwise the app will fail to resolve the dependencies and find the entry point of the questionnaire.
+
+`answers` - an array of objects each having `id` (self-explanatory, can be any string), `value` (will be displayed to the user) and `nextQuestionId` (self-explanatory, if set to `null` then this indicates that after answering of this the quiz 'ends').
 
 The `resolve()` method returns a `Questionnaire` JavaScript object that can be JSON serialized. This object will be used by Next.js to generate paths and questions statically. Warning: don't forget to call resolve at the end, as QuestionnaireBuilder cannot be JSON serialized
 
-Remember, a questionnaire is a graph embodied as a JavaScript object, and each graph has vertexes and arcs. <b>The questions are the vertexes and the ids are the arcs</b>
+Remember, a questionnaire is a graph embodied as a JavaScript object, and each graph has vertexes and arcs. <b>The questions are the vertexes and the ids are the arcs.</b>
 
 ### Creating multiple questions
 
@@ -169,12 +171,12 @@ new QuestionnaireBuilder()
       {
         id: 'a1',
         value: 'A1',
-        nextQuestionId: 'one-question-id',
+        nextQuestionId: 'one-question-id', //look here
       },
       {
         id: 'a2',
         value: 'A2',
-        nextQuestionId: 'another-question-id',
+        nextQuestionId: 'another-question-id', //and here
       },
     ],
   })
@@ -246,7 +248,11 @@ new QuestionnaireBuilder()
 
 The `dependents` property defines the value which will be substituted in the dependent question in case this answer has been chosen.
 
-Warning: currently you can create only one slot per dependent question and each answer can substitute only one value
+Warning: if you don't specify the `dependents` property for a question that depends on this question, you will encounter an error.
+
+Warning: the `dependents` property must be specified for each answer of the question
+
+Warning: currently you can create only one slot per dependent question and each answer can substitute only one value.
 
 ### Dynamic nextQuestionId
 
@@ -269,6 +275,8 @@ new QuestionnaireBuilder()
   })
   .resolve();
 ```
+
+Warning: don't forget to specify the 'dependents' for each answer of the questions that this question depends on. 
 
 ### Dynamic previousQuestionId
 
@@ -304,3 +312,4 @@ You can specify `variant` of your question (`light` or `dark`), `subtitle`, `cen
 1. You have to always keep your eye on the referential integrity between questions. <b>Violating the integrity will make the app to crash</b>
 2. The app currently handles only these two kinds of errors: `NoEntrypointQuestion` error and `PageNotFound` error. Other types may cause the app to crash.
 3. There is no 'question protection' meaning that the user can use the browser address string to bypass some questions. However to do this, the user must know the question ID in advance, which is not possible unless the user passes the survey at least once
+4. Read all the warning messages very carefully, it contains the additional information about all the pitfalls and other limitations.
