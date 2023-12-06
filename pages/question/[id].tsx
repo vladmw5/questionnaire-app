@@ -56,8 +56,6 @@ const QuestionPage: NextPage<QuestionPageStaticProps> = ({
     answers,
   );
 
-  console.log(resolvedQuestion);
-
   return (
     <main
       className={clsx(
